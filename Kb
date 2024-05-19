@@ -1,0 +1,34 @@
+local userInputService = game:GetService("UserInputService")
+
+-- Define your key bindings here
+local keyBindings = {
+    [Enum.KeyCode.W] = "MoveForward",
+    [Enum.KeyCode.A] = "MoveLeft",
+    [Enum.KeyCode.S] = "MoveBackward",
+    [Enum.KeyCode.D] = "MoveRight",
+    [Enum.KeyCode.Space] = "Jump",
+    [Enum.KeyCode.LeftShift] = "Sprint",
+}
+
+-- Function to handle keyboard input
+local function handleInput(input, isPressed)
+    local action = keyBindings[input.KeyCode]
+    if action then
+        if isPressed then
+            -- Perform action when key is pressed
+            print("Pressed", action)
+        else
+            -- Perform action when key is released
+            print("Released", action)
+        end
+    end
+end
+
+-- Connect input events
+userInputService.InputBegan:Connect(function(input)
+    handleInput(input, true)
+end)
+
+userInputService.InputEnded:Connect(function(input)
+    handleInput(input, false)
+end)
